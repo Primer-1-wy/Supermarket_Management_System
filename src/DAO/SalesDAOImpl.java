@@ -15,12 +15,15 @@ public class SalesDAOImpl {
 
     @Override
     public boolean insert(SalesRecord record) throws Exception {
-        String sql = "INSERT INTO salesrecord(userName,chrName,password,role) " + "VALUES(?,?,?,?)";
+        String sql = "INSERT INTO salesrecord(transaction_id,barcode,productName,price,quantity,operator,time) " + "VALUES(?,?,?,?,?,?,?)";
         this.pstmt = this.conn.prepareStatement(sql);
-        this.pstmt.setString(1, user.getUserName());
-        this.pstmt.setString(2, user.getChrName());
-        this.pstmt.setString(3, user.getPassword());
-        this.pstmt.setString(4, user.getRole());
+        this.pstmt.setString(1, record.getTransaction_id());
+        this.pstmt.setString(2, record.getBarcode());
+        this.pstmt.setString(3, record.getProductName());
+        this.pstmt.setDouble(4, record.getPrice());
+        this.pstmt.setInt(5, record.getQuantity());
+        this.pstmt.setString(6, record.getOperator());
+        this.pstmt.setString(7, record.getTime());
         if (this.pstmt.executeUpdate() > 0) {
             return true;
         } else {

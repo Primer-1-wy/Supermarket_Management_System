@@ -72,6 +72,7 @@ public class UserDAOImpl implements IUserDAO {
                 user.setChrName(rs.getString("chrName"));
                 user.setPassword(rs.getString("password"));
                 user.setRole(rs.getString("role"));
+                System.out.println("succ");
                 return user;
             } else {
                 return null;

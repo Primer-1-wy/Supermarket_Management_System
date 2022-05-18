@@ -38,10 +38,10 @@ public class DatabaseConnection {
                     .getResourceAsStream("resource/" + JDBCPROPERTY);
             properties.load(new InputStreamReader(is, "utf-8"));
             is.close();
-            DBDRIVER = properties.getProperty("DBDRIVER");
-            DBURL = properties.getProperty("DBURL");
-            DBUSER = properties.getProperty("DBUSER");
-            PASSWORD = properties.getProperty("PASSWORD");
+            DBDRIVER = properties.getProperty("driver");
+            DBURL = properties.getProperty("url");
+            DBUSER = properties.getProperty("username");
+            PASSWORD = properties.getProperty("passwd");
             // 加载驱动，只需注册一次就行
             Class.forName(DBDRIVER);
         } catch (Exception e) {
@@ -53,6 +53,7 @@ public class DatabaseConnection {
     public DatabaseConnection() {
         try {
             this.conn = DriverManager.getConnection(DBURL, DBUSER, PASSWORD);
+           // System.out.println(DBURL);
         } catch (Exception e) {
             e.printStackTrace();
         }

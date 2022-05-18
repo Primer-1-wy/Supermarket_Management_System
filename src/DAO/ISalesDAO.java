@@ -4,7 +4,7 @@ import VO.SalesRecord;
 
 import java.util.List;
 
-public class ISalesDAO {
+public interface ISalesDAO {
     // 增加一条记录
     public boolean insert(SalesRecord record) throws Exception;
 

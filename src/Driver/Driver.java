@@ -1,4 +1,9 @@
 package Driver;
+import DAO.IUserDAO;
+import DatabaseConnection.DatabaseConnection;
+import Factory.DAOFactory;
+import VO.User;
+
 import java.util.Scanner;
 
 public class Driver {
@@ -66,7 +71,7 @@ public class Driver {
             }
             if (user == null) {
                 System.out.println("User does not exist!");
-                // tries--;
+                 tries--;
                 continue;
             }
 

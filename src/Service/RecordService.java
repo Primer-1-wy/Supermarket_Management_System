@@ -4,6 +4,7 @@ import DAO.ISalesDAO;
 import DAO.IUserDAO;
 import DatabaseConnection.DatabaseConnection;
 import Factory.DAOFactory;
+import VO.SalesRecord;
 
 import java.util.Scanner;
 
@@ -20,6 +21,8 @@ public class RecordService {
     * 收银：输入条形码之后 判断输入是否正确 然后在SalesRecord中增加一条记录
     *
     * */
+
+    /*
     public boolean cashing() throws Exception {
         Scanner sc =new Scanner(System.in);
         System.out.println("请输入商品条形码（6位数字字符）");
@@ -34,6 +37,11 @@ public class RecordService {
             System.out.println("您输入的商品条形码不存在，请确认后重新输入");
         }
         return false;
+    }
+
+*/
+    public boolean InsertRecord(SalesRecord record) throws Exception {
+        return SalesDAO.insert(record);
     }
 
 

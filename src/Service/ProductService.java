@@ -5,6 +5,7 @@ import DAO.ISalesDAO;
 import DAO.ProductDAOImpl;
 import DatabaseConnection.DatabaseConnection;
 import Factory.DAOFactory;
+import VO.User;
 
 public class ProductService{
     private DatabaseConnection dbc; // 数据库连接类
@@ -14,5 +15,10 @@ public class ProductService{
         dbc=new DatabaseConnection();
         ProductDAO= DAOFactory.getIProductDAOInstance(dbc.getConnection());
     }
+
+    public User getById(String barcode) throws Exception {
+        return ProductDAO.getById(barcode);
+    }
+
 
 }

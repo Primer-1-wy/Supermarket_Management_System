@@ -28,7 +28,7 @@ public class Driver {
 
         menu();
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nPlease select an option: ");
+        System.out.println("Please select an option: ");
         int option = sc.nextInt();
         switch (option) {
         case 1:

@@ -1,0 +1,96 @@
+package DAO;
+
+import VO.Product;
+import VO.User;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+
+public class ProductDAOImpl implements IProductDAO{
+
+    private Connection conn;
+    private PreparedStatement pstmt;
+
+    public ProductDAOImpl(Connection conn) {
+        this.conn = conn;
+    }
+
+    @Override
+    public boolean insert(Product product) throws Exception{
+        String sql = "INSERT INTO Product(barcode,productName,price,supplyer) " + "VALUES(?,?,?,?)";
+        this.pstmt = this.conn.prepareStatement(sql);
+        this.pstmt.setString(1, product.getBarcode());
+        this.pstmt.setString(2, product.getProductName());
+        this.pstmt.setDouble(3, product.getPrice());
+        this.pstmt.setString(4, product.getSupply());
+        if (this.pstmt.executeUpdate() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public boolean update(Product product) throws Exception {
+        String sql = "UPDATE Product SET productName=? ,price=?,supplyer=? WHERE barcode=?";
+        this.pstmt = this.conn.prepareStatement(sql);
+        this.pstmt.setString(1, product.getProductName());
+        this.pstmt.setDouble(2, product.getPrice());
+        this.pstmt.setString(3, product.getSupply());
+        this.pstmt.setString(4, product.getBarcode());
+        if (this.pstmt.executeUpdate() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delete(String barcode) throws Exception {
+        String sql = "DELETE FROM Product WHERE barcode=?";
+        this.pstmt = this.conn.prepareStatement(sql);
+        this.pstmt.setString(1, barcode);
+        if (this.pstmt.executeUpdate() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public User getById(String barcode) {
+        String sql = "SELECT * FROM user WHERE barcode=?";
+        try {
+            this.pstmt = this.conn.prepareStatement(sql);
+            this.pstmt.setString(1, barcode);
+            ResultSet rs = this.pstmt.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setUserName(rs.getString("userName"));
+                user.setChrName(rs.getString("chrName"));
+                user.setPassword(rs.getString("password"));
+                user.setRole(rs.getString("role"));
+                System.out.println("succ");
+                return user;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+/*
+    @Override
+    public List<User> query(User user) throws Exception {
+        // 可以后续再实现，但是该方法不能删除，因为实现接口，必须实现接口的所有方法，即使该方法暂时没代码
+
+        return null;
+    }
+ */
+
+}

@@ -1,6 +1,5 @@
 package Factory;
-import DAO.IUserDAO;
-import DAO.UserDAOImpl;
+import DAO.*;
 
 import java.sql.Connection;
 
@@ -15,4 +14,7 @@ public class DAOFactory {
         return new UserDAOImpl(con);
     }
     // 如果业务层还需要获取其他数据层的实例，可以模仿上面继续增加其他的 getI***DAOInstance方法
+    public static ISalesDAO getISalesDAOInstance(Connection con){return new SalesDAOImpl(con);}
+    public static IProductDAO getIProductDAOInstance(Connection con){return new ProductDAOImpl(con);}
+
 }

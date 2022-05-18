@@ -6,6 +6,7 @@ import VO.User;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * 数据层完成后最终一定要交给业务层进行调用，在业务层里面就需要通过工厂取得数据层接口对象， 业务层的接口名称为 XxxxService，保存在
@@ -53,4 +54,37 @@ public class UserService {
         }
         return mapResult;
     }
+
+    public void UpdatePsw() throws Exception {
+        System.out.println("请输入当前用户的原密码");
+        Scanner sc=new Scanner(System.in);
+        String temp_psw=null;
+        String temp_psw2=null;
+        temp_psw= sc.next();
+        User temp_user;
+        temp_user=userDAO.getById(temp_psw);
+
+        while(temp_user==null)
+        {
+            System.out.println("原密码输入不正确，请重新输入:");
+            temp_psw=sc.next();
+        }
+        if(temp_user!=null)
+        {
+            System.out.println("请设置新的密码：");
+            temp_psw=sc.next();
+            //TODO:密码复杂性检查
+        }
+        System.out.println("请确认密码：");
+        temp_psw2= sc.next();
+        while(temp_psw!=temp_psw2)
+        {
+            System.out.println("两次输入的密码必须一致，请重新输入确认密码：");
+            temp_psw2= sc.next();
+        }
+        temp_user.setPassword(temp_psw);
+        userDAO.update(temp_user);
+        System.out.println("您已成功修改密码，请谨记");
+    }
+
 }

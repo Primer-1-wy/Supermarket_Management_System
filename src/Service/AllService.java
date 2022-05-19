@@ -22,17 +22,16 @@ public class AllService {
         userService=new UserService();
     }
 
-    public ProductService getProductService() {
-        return productService;
+    public void AllService_Close()
+    {
+        productService.ProductService_Close();
+        recordService.RecordService_Close();
+        userService.UserService_Close();
     }
 
-    public RecordService getRecordService() {
-        return recordService;
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
+    public ProductService getProductService() {return productService;}
+    public RecordService getRecordService() {return recordService;}
+    public UserService getUserService() {return userService;}
 
     public void cashing() throws Exception {
         Scanner sc=new Scanner(System.in);
@@ -50,7 +49,8 @@ public class AllService {
         temp_quantity=sc.nextInt();
 
         salesRecord=new SalesRecord("id",temp_barcode,product.getProductName(), product.getPrice(), temp_quantity,"operator","time");
-        recordService.InsertRecord(salesRecord);
+       //添加
+        // recordService.InsertRecord(salesRecord);
         System.out.println("添加成功");
     }
 

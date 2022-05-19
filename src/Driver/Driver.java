@@ -3,6 +3,8 @@ import DAO.IUserDAO;
 import DatabaseConnection.DatabaseConnection;
 import Factory.DAOFactory;
 import Service.AllService;
+import Service.ProductService;
+import VO.Product;
 import VO.User;
 
 import java.util.Scanner;
@@ -16,11 +18,16 @@ public class Driver {
 
     public static void main(String[] args)  {
         AllService allService=new AllService();
+        ProductService productService = new ProductService();
         try {
-            allService.cashing();
+            //allService.cashing();
+            productService.insert();
+            productService.ProductService_Close();
         }catch (Exception e)
         {
             //TODO
+            e.printStackTrace();
+            System.out.println("异常！！");
         }
     }
 

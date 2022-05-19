@@ -19,15 +19,17 @@ public class ProductDAOImpl implements IProductDAO{
 
     @Override
     public boolean insert(Product product) throws Exception{
-        String sql = "INSERT INTO Product(barcode,productName,price,supplyer) " + "VALUES(?,?,?,?)";
+        String sql = "INSERT INTO product(barcode,productName,price,supplyer) " + "VALUES(?,?,?,?)";
         this.pstmt = this.conn.prepareStatement(sql);
         this.pstmt.setString(1, product.getBarcode());
         this.pstmt.setString(2, product.getProductName());
         this.pstmt.setDouble(3, product.getPrice());
         this.pstmt.setString(4, product.getSupply());
         if (this.pstmt.executeUpdate() > 0) {
+            pstmt.close();
             return true;
         } else {
+            pstmt.close();
             return false;
         }
     }

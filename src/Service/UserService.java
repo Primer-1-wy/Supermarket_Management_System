@@ -22,6 +22,11 @@ public class UserService {
         this.userDAO = DAOFactory.getIUserDAOInstance(this.dbc.getConnection());
     } // 从工厂类获取 dao 实现类对象
 
+    public void UserService_Close()
+    {
+        dbc.close();
+    }
+
     /**
      * 用户登录检查
      * 

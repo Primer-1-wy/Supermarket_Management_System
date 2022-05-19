@@ -3,9 +3,12 @@ package DAO;
 import VO.SalesRecord;
 import VO.User;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SalesDAOImpl implements ISalesDAO{
@@ -33,22 +36,25 @@ public class SalesDAOImpl implements ISalesDAO{
             return false;
         }
     }
-    /*
+
     @Override
     public boolean update(SalesRecord record) throws Exception {
-        String sql = "UPDATE user SET chrName=? ,password=?,role=? WHERE userName=?";
+        String sql = "UPDATE salesdetaile SET barcode=?,productName=?,price=?,quantity=?,operator=?,time=? WHERE transaction_id=?";
         this.pstmt = this.conn.prepareStatement(sql);
-        this.pstmt.setString(1, user.getChrName());
-        this.pstmt.setString(2, user.getPassword());
-        this.pstmt.setString(3, user.getRole());
-        this.pstmt.setString(4, user.getUserName());
+        this.pstmt.setString(1, record.getBarcode());
+        this.pstmt.setString(2, record.getProductName());
+        this.pstmt.setDouble(3, record.getPrice());
+        this.pstmt.setInt(4, record.getQuantity());
+        this.pstmt.setString(5, record.getOperator());
+        this.pstmt.setString(6, record.getTime());
+
         if (this.pstmt.executeUpdate() > 0) {
             return true;
         } else {
             return false;
         }
     }
-     */
+
     @Override
     public boolean delete(String productName) throws Exception {
         String sql = "DELETE FROM salesrecord WHERE productName=?";
@@ -94,10 +100,35 @@ public class SalesDAOImpl implements ISalesDAO{
     }
     public List<SalesRecord> query(SalesRecord record) throws Exception
     {
-        List<SalesRecord> result;
+        String sql="SELECT * FROM salesrecord WHERE saleTime=?";
+        List<SalesRecord> list;
+        String temp_Date=record.getTime();
+        ResultSet res=null;
+        pstmt.setObject(1,"saleTime");
+        res=pstmt.executeQuery();
+        ResultSetMetaData rsd=res.getMetaData();
+        list=new ArrayList<SalesRecord>();
 
-        //TODO:..
-        return null;
+        while(res.next())//读下一行
+        {
+            SalesRecord salesRecord = new SalesRecord();//实例化
+            for(int i=0;i<rsd.getColumnCount();i++)
+            {
+                try{
+                    String column =rsd.getColumnLabel(i+1);
+                    Object value=res.getObject(column);
+                    Field field =salesRecord.getClass().getDeclaredField(column);
+                    field.setAccessible(true);
+                    field.set(salesRecord,value);
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                list.add(salesRecord);
+            }
+        }
+
+        return list;
     }
 
 

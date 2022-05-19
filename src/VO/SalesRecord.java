@@ -37,4 +37,17 @@ public class SalesRecord {
 
     public SalesRecord() {
     }
+
+    @Override
+    public String toString() {
+        return "SalesRecord{" +
+                "transaction_id='" + transaction_id + '\'' +
+                ", barcode='" + barcode + '\'' +
+                ", productName='" + productName + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", operator='" + operator + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }

@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ISalesDAO {
     // 增加一条记录
-    public boolean insert(SalesRecord record) throws Exception;
+    public  boolean insert(SalesRecord record) throws Exception;
 
     // 修改记录
-    // public boolean update(SalesRecord user) throws Exception;
+     public boolean update(SalesRecord user) throws Exception;
 
     // 按主键（流水号）删除记录
     public boolean delete(String t_id) throws Exception;

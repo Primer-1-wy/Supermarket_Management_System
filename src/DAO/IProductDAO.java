@@ -15,7 +15,7 @@ public interface IProductDAO {    // 增加一条记录
     public boolean delete(String barcode) throws Exception;
 
     // 按主键（商品码）查询记录
-    public User getById(String barcode) throws Exception;
+    public Product getById(String barcode) throws Exception;
     // 查询满足条件的记录：查询条件封装在 user 对象中，若 user 对象的某个成员变量值为 null，则表示查询时忽略该字段查询条件
 
    // public List<User> query(Product product) throws Exception;

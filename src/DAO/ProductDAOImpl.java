@@ -61,20 +61,20 @@ public class ProductDAOImpl implements IProductDAO{
     }
 
     @Override
-    public User getById(String barcode) {
-        String sql = "SELECT * FROM user WHERE barcode=?";
+    public Product getById(String barcode) {
+        String sql = "SELECT * FROM Product WHERE barcode=?";
         try {
             this.pstmt = this.conn.prepareStatement(sql);
             this.pstmt.setString(1, barcode);
             ResultSet rs = this.pstmt.executeQuery();
             if (rs.next()) {
-                User user = new User();
-                user.setUserName(rs.getString("userName"));
-                user.setChrName(rs.getString("chrName"));
-                user.setPassword(rs.getString("password"));
-                user.setRole(rs.getString("role"));
+                Product product = new Product();
+                product.setProductName(rs.getString("productName"));
+                product.setPrice(rs.getDouble("price"));
+                product.setSupply(rs.getString("supply"));
+                product.setBarcode(rs.getString("barcode"));
                 System.out.println("succ");
-                return user;
+                return product;
             } else {
                 return null;
             }

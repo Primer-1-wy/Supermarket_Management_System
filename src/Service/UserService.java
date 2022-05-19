@@ -87,4 +87,7 @@ public class UserService {
         System.out.println("您已成功修改密码，请谨记");
     }
 
+    public User getById(String userName) throws Exception {
+        return userDAO.getById(userName);
+    }
 }

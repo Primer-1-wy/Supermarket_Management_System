@@ -94,6 +94,7 @@ public class SalesDAOImpl implements ISalesDAO{
     }
     public List<SalesRecord> query(SalesRecord record) throws Exception
     {
+        List<SalesRecord> result;
 
         //TODO:..
         return null;

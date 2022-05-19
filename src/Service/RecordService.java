@@ -41,6 +41,8 @@ public class RecordService {
 
 */
     public boolean InsertRecord(SalesRecord record) throws Exception {
+        Scanner sc =new Scanner(System.in);
+        System.out.println("");
         return SalesDAO.insert(record);
     }
 

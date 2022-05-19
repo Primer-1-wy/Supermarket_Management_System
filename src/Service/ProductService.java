@@ -5,6 +5,7 @@ import DAO.ISalesDAO;
 import DAO.ProductDAOImpl;
 import DatabaseConnection.DatabaseConnection;
 import Factory.DAOFactory;
+import VO.Product;
 import VO.User;
 
 public class ProductService{
@@ -16,7 +17,7 @@ public class ProductService{
         ProductDAO= DAOFactory.getIProductDAOInstance(dbc.getConnection());
     }
 
-    public User getById(String barcode) throws Exception {
+    public Product getById(String barcode) throws Exception {
         return ProductDAO.getById(barcode);
     }
 
